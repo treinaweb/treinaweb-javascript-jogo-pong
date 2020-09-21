@@ -1,5 +1,6 @@
 import {Game} from './scripts/game-engine/game.js';
 import {Paddle} from './scripts/game/Paddle.js';
+import {Ball} from './scripts/game/Ball.js';
 
 
 const p1Button = document.querySelector('#player1');
@@ -13,7 +14,9 @@ p2Button.addEventListener('click', () => startGame(2));
 
 Game.constructor();
 Promise.all([
-    Game.SoundManager.loadAll([]),
+    Game.SoundManager.loadAll([
+        {name: 'pongHit', src: './scripts/game/snd/pong-hit.mp3'}
+    ]),
     Game.ImageManager.loadAll([])
 ])
 .then(() => {
@@ -31,9 +34,11 @@ function startGame(players){
 
     const paddle = new Paddle();
     const paddle2 = new Paddle('right');
+    const ball = new Ball();
 
     Game.addObject(paddle);
     Game.addObject(paddle2);
+    Game.addObject(ball);
 
 
     paddle.update = function(){

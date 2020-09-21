@@ -1,5 +1,6 @@
 import {Game} from './scripts/game-engine/game.js';
 import {Paddle} from './scripts/game/Paddle.js';
+import {PaddleAI} from './scripts/game/PaddleAI.js';
 import {Ball} from './scripts/game/Ball.js';
 
 
@@ -22,9 +23,7 @@ Promise.all([
 .then(() => {
     buttonsList.style.display = 'flex';
     
-    startGame(1);
-    
-    
+    startGame(2);
 });
 
 
@@ -35,10 +34,18 @@ function startGame(players){
     const paddle = new Paddle();
     const paddle2 = new Paddle('right');
     const ball = new Ball();
+    const paddleAI = new PaddleAI(ball);
 
     Game.addObject(paddle);
-    Game.addObject(paddle2);
+    //Game.addObject(paddle2);
+    //Game.addObject(paddleAI);
     Game.addObject(ball);
+
+    if(players === 1){
+        Game.addObject(paddleAI);
+    }else{
+        Game.addObject(paddle2);
+    }
 
 
     paddle.update = function(){

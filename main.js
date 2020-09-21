@@ -1,4 +1,5 @@
 import {Game} from './scripts/game-engine/game.js';
+import {Paddle} from './scripts/game/Paddle.js';
 
 
 const p1Button = document.querySelector('#player1');
@@ -18,6 +19,8 @@ Promise.all([
 .then(() => {
     buttonsList.style.display = 'flex';
     
+    startGame(1);
+    
     
 });
 
@@ -25,4 +28,32 @@ Promise.all([
 function startGame(players){
     buttonsList.style.display = 'none';
     Game.start();
+
+    const paddle = new Paddle();
+    const paddle2 = new Paddle('right');
+
+    Game.addObject(paddle);
+    Game.addObject(paddle2);
+
+
+    paddle.update = function(){
+        if(this.input.onKey(this.input.key.W)){
+            this.goUp();
+        }
+
+        if(this.input.onKey(this.input.key.S)){
+            this.goDown();
+        }
+    }
+
+    paddle2.update = function(){
+        if(this.input.onKey(this.input.key.UP)){
+            this.goUp();
+        }
+
+        if(this.input.onKey(this.input.key.DOWN)){
+            this.goDown();
+        }
+    }
+
 }

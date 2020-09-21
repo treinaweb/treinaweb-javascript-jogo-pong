@@ -27,12 +27,12 @@ export class Ball extends GameObject{
 
     invertX(){
         this.xDirection *= -1;
-        //this.game.SoundManager.play('pongHit');
+        this.game.SoundManager.play('pongHit');
     }
     
     invertY(){
         this.yDirection *= -1;
-        //this.game.SoundManager.play('pongHit');
+        this.game.SoundManager.play('pongHit');
     }
 
     goUp(){
